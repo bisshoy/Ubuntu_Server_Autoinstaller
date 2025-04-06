@@ -1,0 +1,31 @@
+#cloud-config
+
+# From Stack Exchange, to skip autoinstall confirmation
+bootcmd:
+  - cat /proc/cmdline > /tmp/cmdline
+  - sed -i'' 's/$/ autoinstall/g' /tmp/cmdline
+  - mount -n --bind -o ro /tmp/cmdline /proc/cmdline
+
+autoinstall:
+  version: 1
+  identity:
+    hostname: ubuntu-vm
+    realname: student
+    username: student
+    password: ""
+  keyboard:
+    layout: us
+  locale: en_US
+  network:
+    version: 2
+    ethernets:
+      ens33:
+        dhcp4: true
+  storage:
+    layout:
+      name: lvm
+  ssh:
+    install-server: true
+  packages:
+    - htop
+

@@ -68,9 +68,9 @@ def create_vm():
 			--filename {VM_DISK} \
             --size {DISK_SIZE_MB}")
     
-	# This will give the VM a SATA controller. A likely problem
-	# here is that I'm using an Intel chipset, so so does this. 
-	# I'd have to make a separate version for other chipsets 
+	# This will give the VM a SATA controller. It will also use
+	# an emulated Intel chipset, since I've found that causes the
+	# fewest problems with Linux  
     run(f"VBoxManage storagectl {VM_NAME} \
 			--name 'SATA Controller' \
         	--add sata \
